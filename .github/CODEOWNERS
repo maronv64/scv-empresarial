@@ -1,13 +1,13 @@
 # CODEOWNERS - scv-empresarial
 
 # Propietarios globales 
-* @maronv64_OWNER @Pame1764_COLLABORATOR
+* @maronv64_OWNER @Pame1764
 
 # Propietarios por área de responsabilidad
-/src/               @maronv64_OWNER
-/docs/              @Pame1764_COLLABORATOR
-/tests/             @maronv64_OWNER @Pame1764_COLLABORATOR
+/src/               @maronv64
+/docs/              @Pame1764
+/tests/             @maronv64 @Pame1764
 
 # Archivos críticos requieren ambos reviewers
-CONTRIBUTING.md     @maronv64_OWNER @Pame1764_COLLABORATOR
-README.md           @maronv64_OWNER @Pame1764_COLLABORATOR
+CONTRIBUTING.md     @maronv64 @Pame1764
+README.md           @maronv64 @Pame1764
