@@ -1,0 +1,14 @@
+{
+  "name": "practica-cicd-s4",
+  "version": "0.1.0",
+  "description": "Repositorio de práctica para taller CI/CD - Semana 4",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "test": "echo 'Running tests...' && node tests/app.test.js",
+    "lint": "echo 'Linting code...' && exit 0"
+  },
+  "keywords": ["git", "cicd", "practice"],
+  "author": "Estudiante MDW101",
+  "license": "MIT"
+}
