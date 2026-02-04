@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# ============================================
+# Hook: pre-commit
+# Bloquea commits que contengan TODO o FIXME
+# MDW101 - Control de Versiones
+# ============================================
+
+echo "🔍 Verificando código antes del commit..."
+
+# Buscar TODO o FIXME en archivos staged
+FOUND=$(git diff --cached --name-only | xargs grep -l -E "(TODO|FIXME)" 2>/dev/null)
+
+if [ -n "$FOUND" ]; then
+    echo ""
+    echo "❌ ERROR: Se encontraron TODO o FIXME en el código"
+    echo ""
+    echo "Archivos afectados:"
+    echo "$FOUND" | while read file; do
+        echo "  → $file"
+        grep -n -E "(TODO|FIXME)" "$file" | head -3 | while read line; do
+            echo "      $line"
+        done
+    done
+    echo ""
+    echo "Por favor, resuelve los TODO/FIXME antes de hacer commit."
+    echo ""
+    exit 1
+fi
+
+echo "✅ Código verificado - No se encontraron TODO/FIXME"
+exit 0

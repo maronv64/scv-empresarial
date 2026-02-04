@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    name: Validar Código
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Mostrar información del repositorio
+        run: |
+          echo "📁 Repositorio: ${{ github.repository }}"
+          echo "🌿 Rama: ${{ github.ref_name }}"
+          echo "👤 Actor: ${{ github.actor }}"
+          echo "📝 Commit: ${{ github.sha }}"
+
+      - name: Listar archivos del proyecto
+        run: |
+          echo "📂 Estructura del proyecto:"
+          ls -la
+          echo ""
+          echo "📂 Contenido de src/:"
+          ls -la src/
+
+      - name: Verificar sintaxis JavaScript
+        run: |
+          echo "🔍 Verificando sintaxis de archivos JS..."
+          for file in src/*.js; do
+            echo "  Verificando: $file"
+            node --check "$file"
+          done
+          echo "✅ Sintaxis correcta"
+
+      - name: Ejecutar tests
+        run: |
+          echo "🧪 Ejecutando tests..."
+          npm test
+
+      - name: Verificar que no hay TODOs
+        run: |
+          echo "🔍 Buscando TODO/FIXME en el código..."
+          if grep -r "TODO\|FIXME" src/; then
+            echo "⚠️ Advertencia: Se encontraron TODO/FIXME"
+          else
+            echo "✅ No se encontraron TODO/FIXME"
+          fi
+
+      - name: Resumen final
+        run: |
+          echo ""
+          echo "=========================================="
+          echo "✅ Pipeline completado exitosamente"
+          echo "=========================================="
